@@ -86,8 +86,8 @@ module "eks" {
   }
 
   fargate_profiles = {
-    "fp-${var.project_name}" = {
-      name = "fp-${var.project_name}"
+    "fp-default" = {
+      name = "fp-default"
       selectors = [
         {
           namespace = "default"
@@ -102,6 +102,60 @@ module "eks" {
         Owner = "default"
       }
 
+      timeouts = {
+        create = "20m"
+        delete = "20m"
+      }
+    },
+    "fp-dev" = {
+      name = "fp-dev"
+      selectors = [
+        {
+          namespace = "dev"
+        }
+      ]
+      subnet_ids = [var.private_subnet_ids[0], var.private_subnet_ids[1]]
+
+      tags = {
+        Owner = "default"
+      }
+
+      timeouts = {
+        create = "20m"
+        delete = "20m"
+      }
+    },
+    "fp-test" = {
+      name = "fp-test"
+      selectors = [
+        {
+          namespace = "test"
+        }
+      ]
+      subnet_ids = [var.private_subnet_ids[0], var.private_subnet_ids[1]]
+
+      tags = {
+        Owner = "default"
+      }
+
+      timeouts = {
+        create = "20m"
+        delete = "20m"
+      }
+    },
+    "fp-stage" = {
+      name = "fp-stage"
+      selectors = [
+        {
+          namespace = "stage"
+        }
+      ]
+      subnet_ids = [var.private_subnet_ids[0], var.private_subnet_ids[1]]
+
+      tags = {
+        Owner = "default"
+      }
+    
       timeouts = {
         create = "20m"
         delete = "20m"
